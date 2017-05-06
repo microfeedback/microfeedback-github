@@ -2,7 +2,6 @@ require('dotenv').config();
 const assert = require('assert');
 
 const parseGH = require('parse-github-repo-url');
-
 const axios = require('axios');
 const { createError } = require('micro');
 const wishes = require('micro-wishes');
@@ -15,9 +14,8 @@ assert(GH_TOKEN, 'GH_TOKEN not set');
 const [username, repoName] = parseGH(GH_REPO);
 const GH_URL = `https://api.github.com/repos/${username}/${repoName}/issues`;
 
-const GitHubBackend = async ({ name, body }) => {
-  const title = 'TODO';
-  const fullBody = `Posted by ${name}: ${body}`;
+const GitHubBackend = async ({ body }) => {
+  const title = '[wishes] TODO';
   try {
     const { data } = await axios({
       method: 'POST',
@@ -27,7 +25,7 @@ const GitHubBackend = async ({ name, body }) => {
       },
       data: {
         title,
-        body: fullBody,
+        body,
       },
     });
     return data;

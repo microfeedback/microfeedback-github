@@ -300,6 +300,12 @@ aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
+axios-mock-adapter@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/axios-mock-adapter/-/axios-mock-adapter-1.8.1.tgz#70085e5d70c93d5fa93e323011c4b64f02bd2ad1"
+  dependencies:
+    deep-equal "^1.0.1"
+
 axios@^0.16.1:
   version "0.16.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.16.1.tgz#c0b6d26600842384b8f509e57111f0d2df8223ca"
@@ -996,7 +1002,7 @@ decamelize@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
 
-deep-equal@^1.0.0:
+deep-equal@^1.0.0, deep-equal@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
 
@@ -2413,9 +2419,9 @@ micro-cors@^0.0.4:
     request "^2.81.0"
     request-promise "^4.2.0"
 
-micro-wishes@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/micro-wishes/-/micro-wishes-0.2.0.tgz#d9faee6e3100e66c67de51d3f9586e90046ccade"
+micro-wishes@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/micro-wishes/-/micro-wishes-0.4.0.tgz#4a8061690e1fd30db0a55e14e87dcd2e68a8b65e"
   dependencies:
     axios "^0.16.1"
     micro-cors "^0.0.4"
