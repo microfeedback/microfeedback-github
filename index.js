@@ -1,3 +1,4 @@
+require('dotenv').config();
 const assert = require('assert');
 
 const parseGH = require('parse-github-repo-url');
