@@ -8,17 +8,29 @@
   "scripts": {
     "start": "micro index.js",
     "dev": "nodemon --exec \"npm start\" -e \"js\"",
-    "test": "NODE_ENV=test ava",
+    "test": "NODE_ENV=test npm run lint && ava",
     "test:debug": "iron-node ./node_modules/ava/profile.js test.js",
     "lint": "eslint ."
   },
-  "repository": "wishes-code/micro-wishes-github",
+  "engines": {
+    "node": ">=7"
+  },
+  "keywords": [
+    "micro",
+    "wishes",
+    "microservice",
+    "feedback",
+    "github",
+    "issues"
+  ],
+  "repository": "wishesjs/micro-wishes-github",
   "author": "Steven Loria",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.3",
-    "eslint-plugin-import": "^2.2.0"
+    "eslint-plugin-import": "^2.2.0",
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
     "axios": "^0.16.1",
