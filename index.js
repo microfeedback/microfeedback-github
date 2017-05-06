@@ -1,5 +1,7 @@
 const assert = require('assert');
 
+const parseGH = require('parse-github-repo-url');
+
 const axios = require('axios');
 const { createError } = require('micro');
 const wishes = require('micro-wishes');
@@ -9,7 +11,8 @@ const { GH_REPO, GH_TOKEN } = process.env;
 assert(GH_REPO, 'GH_REPO not set');
 assert(GH_TOKEN, 'GH_TOKEN not set');
 
-const URL = `https://api.github.com/repos/${GH_REPO}/issues`;
+const [username, repoName] = parseGH(GH_REPO);
+const URL = `https://api.github.com/repos/${username}/${repoName}/issues`;
 
 const GitHubBackend = async ({ name, body }) => {
   const title = 'TODO';

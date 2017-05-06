@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "micro": "^7.3.2"
+    "micro": "^7.3.2",
+    "micro-wishes": "^0.2.0",
+    "parse-github-repo-url": "^1.4.0"
   }
 }

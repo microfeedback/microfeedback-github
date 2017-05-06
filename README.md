@@ -28,3 +28,9 @@ now wishes-dev/micro-wishes-github -e GH_REPO=myuser/myapp GH_TOKEN=abc123
 ```
 
 - You're done! Copy the URL returned by `now`. This is the URL clients will use to access the service.
+
+## Development
+
+* Fork and clone this repo
+* `yarn install`
+* To run tests: `npm test`
