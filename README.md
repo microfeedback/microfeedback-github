@@ -1,5 +1,7 @@
 # micro-wishes-github
 
+[![Build Status](https://travis-ci.org/wishesjs/micro-wishes-github.svg?branch=master)](https://travis-ci.org/wishesjs/micro-wishes-github)
+
 An easily-deployable microservice for collecting user feedback as GitHub issues.
 
 ## Deploy using [now](https://zeit.co/now)
@@ -36,7 +38,7 @@ now wishes-dev/micro-wishes-github -e GH_REPO=myuser/myapp GH_TOKEN=abc123
 * Copy `.env.example`: `cp .env.example .env`
 * (Optional) Update `GH_TOKEN` in `.env`.
 * To run tests: `npm test`
-* To run the server with auto-reloading: `npm run dev`
+* To run the server with auto-reloading and request logging: `npm run dev`
 
 ### Debugging in tests with iron-node
 
