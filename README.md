@@ -31,6 +31,22 @@ now wishes-dev/micro-wishes-github -e GH_REPO=myuser/myapp GH_TOKEN=abc123
 
 ## Development
 
-* Fork and clone this repo
+* Fork and clone this repo. `cd` into the project directory.
 * `yarn install`
+* Copy `.env.example`: `cp .env.example .env`
+* (Optional) Update `GH_TOKEN` in `.env`.
 * To run tests: `npm test`
+* To run the server with auto-reloading: `npm run dev`
+
+### Debugging in tests with iron-node
+
+Add `debugger` statements, then run the following:
+
+```
+yarn global add iron-node
+npm run test:debug
+```
+
+## Related
+
+- [micro-wishes](https://github.com/wishesjs/micro-wishes)
