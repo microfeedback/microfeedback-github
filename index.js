@@ -13,7 +13,7 @@ assert(GH_REPO, 'GH_REPO not set');
 assert(GH_TOKEN, 'GH_TOKEN not set');
 
 const [username, repoName] = parseGH(GH_REPO);
-const URL = `https://api.github.com/repos/${username}/${repoName}/issues`;
+const GH_URL = `https://api.github.com/repos/${username}/${repoName}/issues`;
 
 const GitHubBackend = async ({ name, body }) => {
   const title = 'TODO';
@@ -21,7 +21,7 @@ const GitHubBackend = async ({ name, body }) => {
   try {
     const { data } = await axios({
       method: 'POST',
-      url: URL,
+      url: GH_URL,
       params: {
         access_token: GH_TOKEN,
       },
@@ -41,3 +41,4 @@ module.exports = wishes(GitHubBackend, {
   name: 'github',
   version: pkg.version,
 });
+Object.assign(module.exports, { GitHubBackend, GH_URL });
