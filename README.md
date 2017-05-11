@@ -6,9 +6,13 @@ An easily-deployable microservice for collecting user feedback as GitHub issues.
 
 ## Deploy using [now](https://zeit.co/now)
 
+If you already have [now](https://zeit.co/now) and a token for the GitHub user that will post issues on your repo, you can deploy using a single command:
+
 ```
-now wishes-dev/micro-wishes-github -e GH_REPO=wishes-dev/testrepo GH_TOKEN=abc123
+now wishes-dev/micro-wishes-github -e GH_REPO=myuser/myrepo -e GH_TOKEN=abc123
 ```
+
+For more detailed setup instructions, see the next section.
 
 ## Detailed instructions
 
@@ -20,7 +24,7 @@ now wishes-dev/micro-wishes-github -e GH_REPO=wishes-dev/testrepo GH_TOKEN=abc12
 
 - Click "Generate token" and copy the token.
 
-- Set up and account with now and install the now client. See [here](https://zeit.co/now) for details.
+- Set up an account with now and install the now client. See [here](https://zeit.co/now) for details.
 - Deploy the service with `now`. You must pass the following environment variables:
   - `GH_REPO`: The repo where issues will be posted, e.g. `myuser/myapp`.
   - `GH_TOKEN`: The access token you just created.
@@ -52,3 +56,7 @@ npm run test:debug
 ## Related
 
 - [micro-wishes](https://github.com/wishesjs/micro-wishes)
+
+## License
+
+MIT Licensed.
