@@ -34,7 +34,7 @@ const makeIssue = ({ body, extra }, req) => {
     suffix = ` on ${req.headers.referer}`;
   }
   const title = `[wishes] New feedback${suffix}: "${truncate(body, 25)}"`;
-  let fullBody = `:bulb: New feedback was posted${suffix}.\n\n## Message\n\n${body}\n\n-----\n`;
+  let fullBody = `:bulb: New feedback was posted${suffix}.\n\n## Feedback\n\n${body}\n\n-----\n`;
   // Format headers as table
   if (req && req.headers) {
     const entries = Object.entries(req.headers).filter(
@@ -61,7 +61,7 @@ const makeIssue = ({ body, extra }, req) => {
   // Format extra information as table
   if (extra) {
     const extraTable = makeTable(['Key', 'Value'], Object.entries(extra));
-    fullBody += `\n### Extra information\n\n${extraTable}`;
+    fullBody += `\n### Extra information\n\n${extraTable}\n`;
   }
   fullBody += `\nReported via *[${pkg.name}](${pkg.repository}) v${pkg.version}*.`;
   return { title, body: fullBody };
