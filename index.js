@@ -28,13 +28,20 @@ const makeTable = (headers, entries, sort = true) => {
   return table(ret);
 };
 
-const makeIssue = ({ body, extra }, req) => {
+const makeIssue = ({ body, extra, screenshotURL }, req) => {
   let suffix = '';
   if (req && req.headers.referer) {
     suffix = ` on ${req.headers.referer}`;
   }
   const title = `[wishes] New feedback${suffix}: "${truncate(body, 25)}"`;
-  let fullBody = `:bulb: New feedback was posted${suffix}.\n\n## Feedback\n\n${body}\n\n-----\n`;
+  let fullBody = `:bulb: New feedback was posted${suffix}.\n\n## Feedback\n\n${body}\n`;
+  // Screenshot
+  if (screenshotURL) {
+    fullBody += `\n## Screenshot\n\n![Screenshot](${screenshotURL})`;
+  }
+  // Start details dropdown
+  fullBody += '<details><summary>Client Details</summary><p>';
+
   // Format headers as table
   if (req && req.headers) {
     const entries = Object.entries(req.headers).filter(
@@ -63,6 +70,8 @@ const makeIssue = ({ body, extra }, req) => {
     const extraTable = makeTable(['Key', 'Value'], Object.entries(extra));
     fullBody += `\n### Extra information\n\n${extraTable}\n`;
   }
+  // End details dropdown
+  fullBody += '\n</p></details>\n';
   fullBody += `\nReported via *[${pkg.name}](${pkg.repository}) v${pkg.version}*.`;
   return { title, body: fullBody };
 };
