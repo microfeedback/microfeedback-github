@@ -38,6 +38,15 @@ test('makeIssue returns headers in body', (t) => {
   t.regex(body, /Mozilla\/5.0/);
 });
 
+test('makeIssue returns screenshot in body if provided', (t) => {
+  const result = makeIssue({ body: 'foo' });
+  t.notRegex(result.body, /Screenshot/);
+
+  const result2 = makeIssue({ body: 'foo', screenshotURL: 'http://test.test/img/' });
+  t.regex(result2.body, /Screenshot/);
+  t.regex(result2.body, /http:\/\/test\.test\/img\//);
+});
+
 test('makeIssue returns extra info', (t) => {
   const input = {
     body: 'test',
