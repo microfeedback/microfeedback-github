@@ -45,7 +45,7 @@ const issueTemplate = `
 ![Screenshot]({{&screenshotURL}})
 {{/screenshotURL}}
 
-<details><summary>Client Details</summary<p>
+<details><summary>Client Details</summary><p>
 
 {{#headerTable}}
 ### Headers
@@ -72,6 +72,8 @@ const issueTemplate = `
 {{/extraTable}}
 
 </p></details>
+
+----------
 
 Reported via *[{{pkg.name}}]({{&pkg.repository}}) v{{pkg.version}}*.
 `;
