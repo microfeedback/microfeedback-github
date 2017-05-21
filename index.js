@@ -8,7 +8,7 @@ const table = require('markdown-table');
 const axios = require('axios');
 const mustache = require('mustache');
 const { createError } = require('micro');
-const wishes = require('micro-wishes');
+const microfeedback = require('microfeedback-core');
 const pkg = require('./package.json');
 
 const { GH_REPO, GH_TOKEN } = process.env;
@@ -85,7 +85,7 @@ const makeIssue = ({ body, extra, screenshotURL }, req) => {
     suffix = ` on ${req.headers.referer}`;
   }
   const view = { suffix, body, extra, screenshotURL, pkg };
-  const title = `[wishes] New feedback${suffix}: "${truncate(body, 25)}"`;
+  const title = `[microfeedback] New feedback${suffix}: "${truncate(body, 25)}"`;
   // Format headers as table
   if (req && req.headers) {
     const entries = Object.entries(req.headers).filter(
@@ -125,7 +125,7 @@ const GitHubBackend = async (input, req) => {
   }
 };
 
-module.exports = wishes(GitHubBackend, {
+module.exports = microfeedback(GitHubBackend, {
   name: 'github',
   version: pkg.version,
 });

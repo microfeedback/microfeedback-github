@@ -1,6 +1,6 @@
-# micro-wishes-github
+# microfeedback-github
 
-[![Build Status](https://travis-ci.org/wishesjs/micro-wishes-github.svg?branch=master)](https://travis-ci.org/wishesjs/micro-wishes-github)
+[![Build Status](https://travis-ci.org/microfeedback/microfeedback-github.svg?branch=master)](https://travis-ci.org/microfeedback/microfeedback-github)
 
 An easily-deployable microservice for collecting user feedback as GitHub issues.
 
@@ -9,7 +9,7 @@ An easily-deployable microservice for collecting user feedback as GitHub issues.
 If you already have [now](https://zeit.co/now) and a token for the GitHub user that will post issues on your repo, you can deploy using a single command:
 
 ```
-now wishes-dev/micro-wishes-github -e GH_REPO=myuser/myrepo -e GH_TOKEN=abc123
+now microfeedback/microfeedback-github -e GH_REPO=myuser/myrepo -e GH_TOKEN=abc123
 ```
 
 For more detailed setup instructions, see the next section.
@@ -30,7 +30,7 @@ For more detailed setup instructions, see the next section.
   - `GH_TOKEN`: The access token you just created.
 
 ```
-now wishes-dev/micro-wishes-github -e GH_REPO=myuser/myapp GH_TOKEN=abc123
+now microfeedback/microfeedback-github -e GH_REPO=myuser/myapp GH_TOKEN=abc123
 ```
 
 - You're done! Copy the URL returned by `now`. This is the URL clients will use to access the service.
@@ -55,7 +55,7 @@ npm run test:debug
 
 ## Related
 
-- [micro-wishes](https://github.com/wishesjs/micro-wishes)
+- [microfeedback-core](https://github.com/microfeedback/microfeedback-core)
 
 ## License
 

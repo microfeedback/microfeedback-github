@@ -27,7 +27,7 @@ test('makeIssue returns formatted title', (t) => {
   const req = { headers: { 'x-foo': 'bar', referer: 'https://test.test/test?test' } };
   const input = { body: 'foo' };
   const { title } = makeIssue(input, req);
-  t.is(title, `[wishes] New feedback on ${req.headers.referer}: "foo"`);
+  t.is(title, `[microfeedback] New feedback on ${req.headers.referer}: "foo"`);
 });
 
 test('makeIssue returns headers in body', (t) => {

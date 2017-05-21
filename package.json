@@ -1,5 +1,5 @@
 {
-  "name": "micro-wishes-github",
+  "name": "microfeedback-github",
   "version": "0.1.0",
   "description": "An easily-deployable feedback microservice that posts GitHub issues on a given repo",
   "files": [
@@ -8,7 +8,7 @@
   "scripts": {
     "start": "micro index.js",
     "dev": "NODE_ENV=dev nodemon --exec \"npm start\" -e \"js\"",
-    "test": "npm run lint && NODE_ENV=test GH_REPO=wishesjs/testrepo GH_TOKEN=secret ava",
+    "test": "npm run lint && NODE_ENV=test GH_REPO=microfeedback/testrepo GH_TOKEN=secret ava",
     "test:debug": "NODE_ENV=test iron-node ./node_modules/ava/profile.js test.js",
     "lint": "eslint ."
   },
@@ -17,13 +17,13 @@
   },
   "keywords": [
     "micro",
-    "wishes",
+    "microfeedback",
     "microservice",
     "feedback",
     "github",
     "issues"
   ],
-  "repository": "https://github.com/wishesjs/micro-wishes-github",
+  "repository": "https://github.com/microfeedback/microfeedback-github",
   "author": "Steven Loria",
   "license": "MIT",
   "devDependencies": {
@@ -39,7 +39,7 @@
     "dotenv": "^4.0.0",
     "markdown-table": "^1.1.0",
     "micro": "^7.3.2",
-    "micro-wishes": "^0.4.0",
+    "microfeedback-core": "^1.0.0",
     "mustache": "^2.3.0",
     "parse-github-repo-url": "^1.4.0",
     "truncate": "^2.0.0",
