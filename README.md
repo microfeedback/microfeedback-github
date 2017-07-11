@@ -1,5 +1,7 @@
 # microfeedback-github
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/microfeedback/microfeedback-github.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/microfeedback/microfeedback-github.svg?branch=master)](https://travis-ci.org/microfeedback/microfeedback-github)
 
 An easily-deployable microservice for collecting user feedback as GitHub issues.
