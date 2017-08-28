@@ -40,7 +40,7 @@ now microfeedback/microfeedback-github -e GH_REPO=myuser/myapp GH_TOKEN=abc123
 ## Development
 
 * Fork and clone this repo. `cd` into the project directory.
-* `yarn install`
+* `npm install`
 * Copy `.env.example`: `cp .env.example .env`
 * (Optional) Update `GH_TOKEN` in `.env`.
 * To run tests: `npm test`
@@ -51,7 +51,7 @@ now microfeedback/microfeedback-github -e GH_REPO=myuser/myapp GH_TOKEN=abc123
 Add `debugger` statements, then run the following:
 
 ```
-yarn global add iron-node
+npm i -g iron-node
 npm run test:debug
 ```
 
