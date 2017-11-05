@@ -16,6 +16,16 @@ test('POST: posts to GitHub API', async (t) => {
   t.deepEqual(result, mockResponse);
 });
 
+test('POST: handles errors from the GitHub API', async (t) => {
+  const mock = new MockAdapter(axios);
+  const mockResponse = {
+    message: 'No no no',
+  };
+  mock.onPost(GH_URL).reply(403, mockResponse);
+  const promise = GitHubBackend({ name: 'Steve', body: 'test' });
+  await t.throws(promise);
+});
+
 test('makeIssue returns title and body', (t) => {
   const input = { body: 'foo' };
   const result = makeIssue(input);

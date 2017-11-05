@@ -121,7 +121,7 @@ const GitHubBackend = async (input, req) => {
     return data;
   } catch (err) {
     const { status, data } = err.response;
-    throw new createError(status, data.message, err);
+    throw createError(status, data.message, err);
   }
 };
 
