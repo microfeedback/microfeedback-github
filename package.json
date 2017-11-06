@@ -39,7 +39,7 @@
     "dotenv": "^4.0.0",
     "markdown-table": "^1.1.0",
     "micro": "^9.0.0",
-    "microfeedback-core": "^1.1.0",
+    "microfeedback-core": "^1.2.1",
     "mustache": "^2.3.0",
     "parse-github-repo-url": "^1.4.0",
     "truncate": "^2.0.0",
