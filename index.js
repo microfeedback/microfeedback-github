@@ -127,6 +127,7 @@ const GitHubBackend = async (input, req) => {
 
 module.exports = microfeedback(GitHubBackend, {
   name: 'github',
+  repo: GH_REPO,
   version: pkg.version,
 });
 Object.assign(module.exports, { GitHubBackend, GH_URL, makeIssue });
