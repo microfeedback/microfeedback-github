@@ -35,7 +35,7 @@
     "micro-dev": "^1.2.2"
   },
   "dependencies": {
-    "axios": "^0.16.1",
+    "axios": "^0.17.0",
     "dotenv": "^4.0.0",
     "markdown-table": "^1.1.0",
     "micro": "^9.0.0",
