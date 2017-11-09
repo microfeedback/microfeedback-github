@@ -27,7 +27,7 @@
   "author": "Steven Loria",
   "license": "MIT",
   "devDependencies": {
-    "ava": "^0.22.0",
+    "ava": "^0.23.0",
     "axios-mock-adapter": "^1.8.1",
     "eslint": "^4.2.0",
     "eslint-config-airbnb-base": "^11.1.3",
