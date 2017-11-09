@@ -13,7 +13,7 @@
     "lint": "eslint ."
   },
   "engines": {
-    "node": ">=7"
+    "node": ">=8"
   },
   "keywords": [
     "micro",
