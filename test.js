@@ -3,7 +3,16 @@ const axios = require('axios');
 
 const MockAdapter = require('axios-mock-adapter');
 
-const { GitHubBackend, GH_URL, makeIssue } = require('./');
+const { GitHubBackend, makeIssue } = require('./');
+
+const makeFakeRequest = () => (
+  {
+    url: 'https://test.test/octocat/Hello-World',
+    headers: {
+      referer: 'http://foo.bar',
+    },
+  }
+);
 
 test('POST: posts to GitHub API', async (t) => {
   const mock = new MockAdapter(axios);
@@ -11,8 +20,9 @@ test('POST: posts to GitHub API', async (t) => {
     id: 1,
     html_url: 'https://github.com/octocat/Hello-World/issues/1347',
   };
-  mock.onPost(GH_URL).reply(201, mockResponse);
-  const result = await GitHubBackend({ name: 'Steve', body: 'test' });
+  mock.onPost('https://api.github.com/repos/octocat/Hello-World/issues').reply(201, mockResponse);
+  const req = makeFakeRequest();
+  const result = await GitHubBackend({ name: 'Steve', body: 'test' }, req);
   t.deepEqual(result, mockResponse);
 });
 
@@ -21,10 +31,13 @@ test('POST: handles errors from the GitHub API', async (t) => {
   const mockResponse = {
     message: 'No no no',
   };
-  mock.onPost(GH_URL).reply(403, mockResponse);
-  const promise = GitHubBackend({ name: 'Steve', body: 'test' });
+  mock.onPost('https://api.github.com/repos/octocat/Hello-World/issues').reply(403, mockResponse);
+  const req = makeFakeRequest();
+  const promise = GitHubBackend({ name: 'Steve', body: 'test' }, req);
   await t.throws(promise);
 });
+
+test.todo('POST: handles invalid URL');
 
 test('makeIssue returns title and body', (t) => {
   const input = { body: 'foo' };

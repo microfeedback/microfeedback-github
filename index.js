@@ -1,7 +1,7 @@
 require('dotenv').config();
 const assert = require('assert');
+const url = require('url');
 
-const parseGH = require('parse-github-repo-url');
 const parseUserAgent = require('ua-parser-js');
 const truncate = require('truncate');
 const table = require('markdown-table');
@@ -9,14 +9,11 @@ const axios = require('axios');
 const mustache = require('mustache');
 const { createError } = require('micro');
 const microfeedback = require('microfeedback-core');
+const trim = require('lodash.trim');
 const pkg = require('./package.json');
 
-const { GH_REPO, GH_TOKEN } = process.env;
-assert(GH_REPO, 'GH_REPO not set');
+const { GH_TOKEN } = process.env;
 assert(GH_TOKEN, 'GH_TOKEN not set');
-
-const [username, repoName] = parseGH(GH_REPO);
-const GH_URL = `https://api.github.com/repos/${username}/${repoName}/issues`;
 
 const HEADER_WHITELIST = ['user-agent', 'origin', 'referer'];
 
@@ -112,10 +109,16 @@ const makeIssue = ({ body, extra, screenshotURL }, req) => {
 };
 
 const GitHubBackend = async (input, req) => {
+  // Match /<username>/<repo>/ in the URL
+  // TODO: Allow base64-encoded repo URL
+  const { pathname } = url.parse(req.url);
+  // trim trailing slashes to get GitHub repo
+  const repo = trim(pathname, '/');
+  const issueURL = `https://api.github.com/repos/${repo}/issues`;
   try {
     const { data } = await axios({
       method: 'POST',
-      url: GH_URL,
+      url: issueURL,
       params: {
         access_token: GH_TOKEN,
       },
@@ -130,7 +133,6 @@ const GitHubBackend = async (input, req) => {
 
 module.exports = microfeedback(GitHubBackend, {
   name: 'github',
-  repo: GH_REPO,
   version: pkg.version,
 });
-Object.assign(module.exports, { GitHubBackend, GH_URL, makeIssue });
+Object.assign(module.exports, { GitHubBackend, makeIssue });

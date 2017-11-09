@@ -10,7 +10,7 @@ An easily-deployable microservice for collecting user feedback as GitHub issues.
 If you already have [now](https://zeit.co/now) and a token for the GitHub user that will post issues on your repo, you can deploy using a single command:
 
 ```
-now microfeedback/microfeedback-github -e GH_REPO=myuser/myrepo -e GH_TOKEN=abc123
+now microfeedback/microfeedback-github -e GH_TOKEN=abc123
 ```
 
 For more detailed setup instructions, see the next section.
@@ -27,11 +27,10 @@ For more detailed setup instructions, see the next section.
 
 - Set up an account with now and install the now client. See [here](https://zeit.co/now) for details.
 - Deploy the service with `now`. You must pass the following environment variables:
-  - `GH_REPO`: The repo where issues will be posted, e.g. `myuser/myapp`.
   - `GH_TOKEN`: The access token you just created.
 
 ```
-now microfeedback/microfeedback-github -e GH_REPO=myuser/myapp GH_TOKEN=abc123
+now microfeedback/microfeedback-github GH_TOKEN=abc123
 ```
 
 - You're done! Copy the URL returned by `now`. This is the URL clients will use to access the service.
