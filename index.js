@@ -84,13 +84,16 @@ const makeIssue = ({ body, extra, screenshotURL }, req) => {
   if (req && req.headers.referer) {
     suffix = ` on ${req.headers.referer}`;
   }
-  const view = { suffix, body, extra, screenshotURL, pkg };
-  const title = `[microfeedback] New feedback${suffix}: "${truncate(body, 25)}"`;
+  const view = {
+    suffix, body, extra, screenshotURL, pkg
+  };
+  const title = `[microfeedback] New feedback${suffix}: "${truncate(
+    body,
+    25,
+  )}"`;
   // Format headers as table
   if (req && req.headers) {
-    const entries = Object.entries(req.headers).filter(
-      e => HEADER_WHITELIST.indexOf(e[0]) >= 0
-    );
+    const entries = Object.entries(req.headers).filter(e => HEADER_WHITELIST.indexOf(e[0]) >= 0);
     view.headerTable = makeTable(['Header', 'Value'], entries);
   }
   // Format user agent info as table
