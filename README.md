@@ -7,7 +7,25 @@ An easily-deployable microservice for collecting user feedback as GitHub issues.
 
 ## Deploy using [now](https://zeit.co/now)
 
-If you already have [now](https://zeit.co/now) and a token for the GitHub user that will post issues on your repo, you can deploy using a single command:
+If you already have a [now](https://zeit.co/now) account and a GitHub
+API token associated with your feedback bot, you can deploy
+microfeedback-github to now using either
+
+- **One click deploy** OR
+- **One command deploy**
+
+
+### One click deploy
+
+Click the button below. Enter a zeit API token associated with your
+account and the GitHub API token associated with your feedback bot's GitHub account.
+
+[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/microfeedback/microfeedback-github&&env=GH_TOKEN)
+
+### One command deploy
+
+Use the `now` CLI to deploy this repo. Pass in your bot's GitHub API
+token.
 
 ```
 now microfeedback/microfeedback-github -e GH_TOKEN=abc123
