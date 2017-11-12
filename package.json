@@ -48,9 +48,9 @@
     "ua-parser-js": "^0.7.12"
   },
   "now": {
-    "env": {
-      "GH_TOKEN": "@gh-token"
-    },
+    "env": [
+      "GH_TOKEN"
+    ],
     "alias": "microfeedback-github"
   }
 }
