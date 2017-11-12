@@ -25,10 +25,11 @@ account and the GitHub API token associated with your feedback bot's GitHub acco
 ### One command deploy
 
 Use the `now` CLI to deploy this repo. Pass in your bot's GitHub API
-token.
+token. You will be prompted to enter the GitHub API token associated
+with your feedback bot's GitHub account.
 
 ```
-now microfeedback/microfeedback-github -e GH_TOKEN=abc123
+now microfeedback/microfeedback-github
 ```
 
 For more detailed setup instructions, see the next section.
@@ -48,10 +49,29 @@ For more detailed setup instructions, see the next section.
   - `GH_TOKEN`: The access token you just created.
 
 ```
-now microfeedback/microfeedback-github GH_TOKEN=abc123
+now microfeedback/microfeedback-github -e GH_TOKEN=abc123
 ```
 
 - You're done! Copy the URL returned by `now`. This is the URL clients will use to access the service.
+
+
+## Configuration
+
+Configuration is defined through environment variables and can be passed
+when you deploy microfeedback-github.
+
+```
+now microfeedback/microfeedback-github -e GH_TOKEN=abc123 -e ALLOWED_REPOS=sloria/website,sloria/another-website
+```
+
+The following options are available:
+
+- `GH_TOKEN` (required): The GitHub API token associated with your
+                         feedback bot's account.
+- `ALLOWED_REPOS`: A comma-delimited list of GitHub repos that maybe
+                    posted to. If `'*'`, allow posting to any repo
+                    that the `GH_TOKEN` has access to (incl. any
+                    public repos). Default: `'*'`
 
 ## Development
 

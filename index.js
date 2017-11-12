@@ -108,12 +108,23 @@ const makeIssue = ({ body, extra, screenshotURL }, req) => {
   return { title, body: mustache.render(issueTemplate, view) };
 };
 
+function getAllowedRepos() {
+  if (!process.env.ALLOWED_REPOS || process.env.ALLOWED_REPOS === '*') {
+    return '*';
+  }
+  return process.env.ALLOWED_REPOS.split(',').map(each => each.trim());
+}
+
 const GitHubBackend = async (input, req) => {
   // Match /<username>/<repo>/ in the URL
   // TODO: Allow base64-encoded repo URL
   const { pathname } = url.parse(req.url);
   // trim trailing slashes to get GitHub repo
   const repo = trim(pathname, '/');
+  const allowedRepos = getAllowedRepos();
+  if (allowedRepos !== '*' && allowedRepos.indexOf(repo) === -1) {
+    throw createError(400, `Repo "${repo}" not allowed.`);
+  }
   const issueURL = `https://api.github.com/repos/${repo}/issues`;
   try {
     const { data } = await axios({
@@ -134,5 +145,6 @@ const GitHubBackend = async (input, req) => {
 module.exports = microfeedback(GitHubBackend, {
   name: 'github',
   version: pkg.version,
+  allowed_repos: getAllowedRepos(),
 });
 Object.assign(module.exports, { GitHubBackend, makeIssue });

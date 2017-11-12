@@ -5,9 +5,9 @@ const MockAdapter = require('axios-mock-adapter');
 
 const { GitHubBackend, makeIssue } = require('./');
 
-const makeFakeRequest = () => (
+const makeFakeRequest = url => (
   {
-    url: 'https://test.test/octocat/Hello-World',
+    url: url || 'https://test.test/octocat/Hello-World',
     headers: {
       referer: 'http://foo.bar',
     },
@@ -37,7 +37,33 @@ test('POST: handles errors from the GitHub API', async (t) => {
   await t.throws(promise);
 });
 
-test.todo('POST: handles invalid URL');
+test('ALLOWED_REPOS', async (t) => {
+  process.env.ALLOWED_REPOS = 'octocat/allowed-repo,octocat/another-repo';
+
+  // set up fake responses
+  const mock = new MockAdapter(axios);
+  const mockResponse = {
+    id: 1,
+    html_url: 'https://github.com/octocat/Hello-World/issues/1347',
+  };
+  mock.onPost('https://api.github.com/repos/octocat/Hello-World/issues').reply(201, mockResponse);
+  const mockResponse2 = {
+    id: 2,
+    html_url: 'https://github.com/octocat/allowed-repo/issues/1347',
+  };
+
+  mock.onPost('https://api.github.com/repos/octocat/allowed-repo/issues').reply(201, mockResponse2);
+
+  const req = makeFakeRequest('https://test.test/octocat/Hello-World');
+  const promise = GitHubBackend({ name: 'Steve', body: 'test' }, req);
+  const error = await t.throws(promise);
+  t.is(error.statusCode, 400);
+  t.is(error.message, 'Repo "octocat/Hello-World" not allowed.');
+
+  const req2 = makeFakeRequest('https://test.test/octocat/allowed-repo');
+  const result = await GitHubBackend({ name: 'Steve', body: 'test' }, req2);
+  t.deepEqual(result, mockResponse2);
+});
 
 test('makeIssue returns title and body', (t) => {
   const input = { body: 'foo' };
