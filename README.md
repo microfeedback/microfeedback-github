@@ -21,6 +21,20 @@ curl -d '{"body": "this is great!"}' \
 
 The feedback will be posted on the given GitHub repo's issue tracker.
 
+
+### API
+
+#### `POST /<github-user>/<github-repo>`
+
+Post a new feedback message on the issue tracker for the given GitHub
+repo.
+
+The JSON payload may contain the following keys:
+
+- `body` (required): The feedback content.
+- `screenshotURL`: Optional URL to a screenshot image.
+- `extra`: Optional object containing optional information to include in the issue.
+
 ## Deploy using [now](https://zeit.co/now)
 
 If you already have a [now](https://zeit.co/now) account and a GitHub
