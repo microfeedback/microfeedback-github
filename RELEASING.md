@@ -1,13 +1,10 @@
 # Releasing
 
-* Install `np`
+With the now client installed, run:
 
 ```
-npm install --global np
+npm run deploy
 ```
 
-* Run `np`. Follow the interactive UI.
-
-```
-np
-```
+This will run `np`, create a deployment with now, and set an now alias
+for the latest deployment.
