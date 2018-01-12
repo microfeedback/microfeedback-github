@@ -1,4 +1,3 @@
-require('dotenv').config();
 const assert = require('assert');
 const url = require('url');
 
@@ -7,23 +6,23 @@ const truncate = require('truncate');
 const table = require('markdown-table');
 const axios = require('axios');
 const mustache = require('mustache');
-const { createError } = require('micro');
+const {createError} = require('micro');
 const microfeedback = require('microfeedback-core');
 const trim = require('lodash.trim');
 const pkg = require('./package.json');
 
-const { GH_TOKEN } = process.env;
+const {GH_TOKEN} = process.env;
 assert(GH_TOKEN, 'GH_TOKEN not set');
 
 const HEADER_WHITELIST = ['user-agent', 'origin', 'referer'];
 
 const makeTable = (headers, entries, sort = true) => {
-  if (!entries.length) {
+  if (entries.length === 0) {
     return '';
   }
   const ret = [headers];
   const orderedEntries = sort ? entries.sort((a, b) => a[0] > b[0]) : entries;
-  orderedEntries.forEach((each) => {
+  orderedEntries.forEach(each => {
     ret.push(each);
   });
   return table(ret);
@@ -76,21 +75,27 @@ Reported via *[{{pkg.name}}]({{&pkg.repository}}) v{{pkg.version}}*.
 `;
 mustache.parse(issueTemplate);
 
-const makeIssue = ({ body, extra, screenshotURL }, req) => {
+const makeIssue = ({body, extra, screenshotURL}, req) => {
   let suffix = '';
   if (req && req.headers.referer) {
     suffix = ` on ${req.headers.referer}`;
   }
   const view = {
-    suffix, body, extra, screenshotURL, pkg
+    suffix,
+    body,
+    extra,
+    screenshotURL,
+    pkg,
   };
   const title = `[microfeedback] New feedback${suffix}: "${truncate(
     body,
-    25,
+    25
   )}"`;
   // Format headers as table
   if (req && req.headers) {
-    const entries = Object.entries(req.headers).filter(e => HEADER_WHITELIST.indexOf(e[0]) >= 0);
+    const entries = Object.entries(req.headers).filter(
+      e => HEADER_WHITELIST.indexOf(e[0]) >= 0
+    );
     view.headerTable = makeTable(['Header', 'Value'], entries);
   }
   // Format user agent info as table
@@ -105,7 +110,7 @@ const makeIssue = ({ body, extra, screenshotURL }, req) => {
   if (extra) {
     view.extraTable = makeTable(['Key', 'Value'], Object.entries(extra));
   }
-  return { title, body: mustache.render(issueTemplate, view) };
+  return {title, body: mustache.render(issueTemplate, view)};
 };
 
 function getAllowedRepos() {
@@ -118,8 +123,8 @@ function getAllowedRepos() {
 const GitHubBackend = async (input, req) => {
   // Match /<username>/<repo>/ in the URL
   // TODO: Allow base64-encoded repo URL
-  const { pathname } = url.parse(req.url);
-  // trim trailing slashes to get GitHub repo
+  const {pathname} = url.parse(req.url);
+  // Trim trailing slashes to get GitHub repo
   const repo = trim(pathname, '/');
   const allowedRepos = getAllowedRepos();
   if (allowedRepos !== '*' && allowedRepos.indexOf(repo) === -1) {
@@ -127,7 +132,7 @@ const GitHubBackend = async (input, req) => {
   }
   const issueURL = `https://api.github.com/repos/${repo}/issues`;
   try {
-    const { data } = await axios({
+    const {data} = await axios({
       method: 'POST',
       url: issueURL,
       params: {
@@ -137,7 +142,7 @@ const GitHubBackend = async (input, req) => {
     });
     return data;
   } catch (err) {
-    const { status, data } = err.response;
+    const {status, data} = err.response;
     throw createError(status, data.message, err);
   }
 };
@@ -145,6 +150,6 @@ const GitHubBackend = async (input, req) => {
 module.exports = microfeedback(GitHubBackend, {
   name: 'github',
   version: pkg.version,
-  allowed_repos: getAllowedRepos(),
+  allowedRepos: getAllowedRepos(),
 });
-Object.assign(module.exports, { GitHubBackend, makeIssue });
+Object.assign(module.exports, {GitHubBackend, makeIssue});
