@@ -12,8 +12,7 @@
     "test": "npm run lint && NODE_ENV=test GH_REPO=microfeedback/testrepo GH_TOKEN=secret ava",
     "test:debug": "NODE_ENV=test iron-node ./node_modules/ava/profile.js test.js",
     "lint": "xo",
-    "release": "np",
-    "postrelease": "npm run release",
+    "release": "np && npm run deploy",
     "deploy": "now . -e GH_TOKEN=@microfeedback-gh-token --public && now alias"
   },
   "engines": {
@@ -49,7 +48,9 @@
     "ua-parser-js": "^0.7.12"
   },
   "xo": {
-    "envs": ["node"],
+    "envs": [
+      "node"
+    ],
     "space": true,
     "rules": {
       "no-warning-comments": 0,

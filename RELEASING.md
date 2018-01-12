@@ -3,7 +3,7 @@
 With the now client installed, run:
 
 ```
-npm run deploy
+npm run release
 ```
 
 This will run `np`, create a deployment with now, and set an now alias
