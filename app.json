@@ -1,0 +1,19 @@
+{
+  "name": "microfeedback-github",
+  "description": "An easily-deployable feedback microservice that posts GitHub issues on a given repo",
+  "repository": "https://github.com/microfeedback/microfeedback-github",
+  "env": {
+    "GH_TOKEN": {
+      "description": "GitHub API token associate with your feedback bot's account",
+      "required": true
+    },
+    "ALLOWED_REPOS": {
+      "description": "Comma-separated list of GitHub repos that may be posted to. If '*', allow posting to any repo.",
+      "required": false,
+      "value": "*"
+    }
+  },
+  "buildpacks": [
+    {"url": "heroku/nodejs"}
+  ]
+}
