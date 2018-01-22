@@ -8,22 +8,9 @@
 
 An easily-deployable microservice for collecting user feedback as GitHub issues.
 
-## Usage
+## Documentation
 
-Send a POST request to `https://microfeedback-github.now.sh/<github-user>/<github-repo>`
-with a JSON body containing a "body" key and a string value containing
-content.
-
-Example:
-
-```
-curl -d '{"body": "this is great!"}' \
-  -H 'Content-Type: application/json' \
-  https://microfeedback-github.now.sh/microfeedback/testrepo
-```
-
-The feedback will be posted on the given GitHub repo's issue tracker.
-
+https://microfeedback.js.org/backends/microfeedback-github/
 
 ## API
 
@@ -46,12 +33,14 @@ microfeedback-github to now using the `now` CLI.
 
 ### One command deploy
 
-Use the `now` CLI to deploy this repo. You will be prompted to enter the GitHub API token associated
-with your feedback bot's GitHub account.
+Use the `now` CLI to deploy this repo. 
 
 ```
 now microfeedback/microfeedback-github
 ```
+
+You will be prompted to enter the GitHub API token associated
+with your feedback bot's GitHub account.
 
 For more detailed setup instructions, see the next section.
 
