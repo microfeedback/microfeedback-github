@@ -70,19 +70,31 @@ For more detailed setup instructions, see the next section.
   - `GH_TOKEN`: The access token you just created.
 
 ```
-now microfeedback/microfeedback-github -e GH_TOKEN=abc123
+now microfeedback/microfeedback-github -e GH_TOKEN=<bot's github token>
 ```
 
 - You're done! Copy the URL returned by `now`. This is the URL clients will use to access the service.
 
 ## Deploy to Heroku
 
-If you prefer to deploy to Heroku, use the deployment button below
+If you prefer to deploy to Heroku, use the deployment button below or
+deploy with Git.
 
 ### One click deploy
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+### Deployment with git
+
+You can also deploy with git and the heroku CLI.
+
+```
+git clone https://github.com/microfeedback/microfeedback-github.git
+cd microfeedback-github
+heroku create
+heroku config:set GH_TOKEN=<bot's github token>
+git push heroku master
+```
 
 ## Configuration
 
