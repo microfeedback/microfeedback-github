@@ -60,3 +60,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# Comma-separated list of allowed repos for microfeedback-github.now.sh
+allowed_repos.txt
