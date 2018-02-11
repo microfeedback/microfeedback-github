@@ -11,6 +11,22 @@
       "description": "Comma-separated list of GitHub repos that may be posted to. If '*', allow posting to any repo.",
       "required": false,
       "value": "*"
+    },
+    "AKISMET_API_KEY": {
+      "description": "Akismet API key to use for spam detection",
+      "required": false
+    },
+    "ENABLE_AKISMET": {
+      "description": "Whether to use the Akismet API for syntax checking. Set to 'false' if AKISMET_API_KEY is set but you don't want spam checking.",
+      "required": false
+    },
+    "PERSPECTIVE_API_KEY": {
+      "description": "Perspective API key to use for toxicity scoring",
+      "required": false
+    },
+    "ENABLE_PERSPECTIVE": {
+      "description": "Whether to use the Perspective API for toxicity scoring. Set to 'false' if PERSPECTIVE_API_KEY is set but you don't want toxicity scoring.",
+      "required": false
     }
   },
   "buildpacks": [

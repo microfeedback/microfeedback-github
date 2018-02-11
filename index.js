@@ -61,6 +61,12 @@ const issueTemplate = `
 {{&osTable}}
 {{/osTable}}
 
+{{#perspectiveTable}}
+### Perspective API
+
+{{&perspectiveTable}}
+{{/perspectiveTable}}
+
 {{#extraTable}}
 ### Extra information
 
@@ -75,7 +81,7 @@ Reported via *[{{pkg.name}}]({{&pkg.repository}}) v{{pkg.version}}*.
 `;
 mustache.parse(issueTemplate);
 
-const makeIssue = ({body, extra, screenshotURL}, req) => {
+const makeIssue = ({body, extra, perspective, screenshotURL}, req) => {
   let suffix = '';
   if (req && req.headers.referer) {
     suffix = ` on ${req.headers.referer}`;
@@ -106,10 +112,15 @@ const makeIssue = ({body, extra, screenshotURL}, req) => {
     const osEntries = Object.entries(userAgent.os).filter(e => e[1]);
     view.osTable = makeTable(['Key', 'Value'], osEntries, false);
   }
+  // Format perspective information as table
+  if (perspective) {
+    view.perspectiveTable = makeTable(['Key', 'Value'], Object.entries(perspective));
+  }
   // Format extra information as table
   if (extra) {
     view.extraTable = makeTable(['Key', 'Value'], Object.entries(extra));
   }
+  // TODO: Add spam label if akismet.spam is true
   return {title, body: mustache.render(issueTemplate, view)};
 };
 
@@ -120,7 +131,7 @@ function getAllowedRepos() {
   return process.env.ALLOWED_REPOS.split(',').map(each => each.trim());
 }
 
-const GitHubBackend = async (input, req) => {
+const GitHubBackend = async ({input, perspective, akismet}, req) => {
   // Match /<username>/<repo>/ in the URL
   // TODO: Allow base64-encoded repo URL
   const {pathname} = url.parse(req.url);
@@ -131,6 +142,7 @@ const GitHubBackend = async (input, req) => {
     throw createError(400, `Repo "${repo}" not allowed.`);
   }
   const issueURL = `https://api.github.com/repos/${repo}/issues`;
+  const {body, extra, screenshotURL} = input;
   try {
     const {data} = await axios({
       method: 'POST',
@@ -138,7 +150,13 @@ const GitHubBackend = async (input, req) => {
       params: {
         access_token: GH_TOKEN,
       },
-      data: makeIssue(input, req),
+      data: makeIssue({
+        body,
+        extra,
+        screenshotURL,
+        perspective,
+        akismet,
+      }, req),
     });
     return data;
   } catch (err) {
