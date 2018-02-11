@@ -1,7 +1,7 @@
 {
   "name": "microfeedback-github",
   "private": true,
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "An easily-deployable feedback microservice that posts GitHub issues on a given repo",
   "files": [
     "index.js"
