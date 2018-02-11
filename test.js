@@ -22,7 +22,8 @@ test('POST: posts to GitHub API', async t => {
     .onPost('https://api.github.com/repos/octocat/Hello-World/issues')
     .reply(201, mockResponse);
   const req = makeFakeRequest();
-  const result = await GitHubBackend({name: 'Steve', body: 'test'}, req);
+  const input = {name: 'Steve', body: 'test'};
+  const result = await GitHubBackend({input}, req);
   t.deepEqual(result, mockResponse);
 });
 
@@ -35,7 +36,8 @@ test('POST: handles errors from the GitHub API', async t => {
     .onPost('https://api.github.com/repos/octocat/Hello-World/issues')
     .reply(403, mockResponse);
   const req = makeFakeRequest();
-  const promise = GitHubBackend({name: 'Steve', body: 'test'}, req);
+  const input = {name: 'Steve', body: 'test'};
+  const promise = GitHubBackend({input}, req);
   await t.throws(promise);
 });
 
@@ -60,13 +62,15 @@ test('ALLOWED_REPOS', async t => {
     .reply(201, mockResponse2);
 
   const req = makeFakeRequest('https://test.test/octocat/Hello-World');
-  const promise = GitHubBackend({name: 'Steve', body: 'test'}, req);
+  const input = {name: 'Steve', body: 'test'};
+  const promise = GitHubBackend({input}, req);
   const error = await t.throws(promise);
   t.is(error.statusCode, 400);
   t.is(error.message, 'Repo "octocat/Hello-World" not allowed.');
 
   const req2 = makeFakeRequest('https://test.test/octocat/allowed-repo');
-  const result = await GitHubBackend({name: 'Steve', body: 'test'}, req2);
+  const input2 = {name: 'Steve', body: 'test'};
+  const result = await GitHubBackend({input: input2}, req2);
   t.deepEqual(result, mockResponse2);
 });
 
@@ -148,4 +152,20 @@ test('makeIssue returns OS info', t => {
   const {body} = makeIssue(input, req);
   t.regex(body, /### Operating System/);
   t.regex(body, /Ubuntu/);
+});
+
+test('makeIssue returns Perspective API info', t => {
+  const req = {
+    headers: {
+      'user-agent':
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.2 (KHTML, like Gecko) Ubuntu/11.10 Chromium/15.0.874.106 Chrome/15.0.874.106 Safari/535.2',
+    },
+  };
+  const perspective = {
+    toxicity: 0.1234,
+  };
+  const input = {body: 'test', perspective};
+  const {body} = makeIssue(input, req);
+  t.regex(body, /### Perspective API/);
+  t.regex(body, /toxicity/);
 });
