@@ -37,7 +37,7 @@
     "xo": "^0.18.2"
   },
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^0.18.0",
     "lodash.trim": "^4.5.1",
     "markdown-table": "^1.1.0",
     "micro": "^9.0.0",
