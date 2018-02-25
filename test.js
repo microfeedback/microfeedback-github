@@ -3,7 +3,7 @@ const axios = require('axios');
 
 const MockAdapter = require('axios-mock-adapter');
 
-const {GitHubBackend, makeIssue} = require('./');
+const {GitHubBackend, makeIssue} = require('.');
 
 const makeFakeRequest = url => ({
   url: url || 'https://test.test/octocat/Hello-World',
