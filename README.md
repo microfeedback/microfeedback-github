@@ -1,7 +1,6 @@
 # microfeedback-github
 
 [![Build Status](https://travis-ci.org/microfeedback/microfeedback-github.svg?branch=master)](https://travis-ci.org/microfeedback/microfeedback-github)
-[![Greenkeeper badge](https://badges.greenkeeper.io/microfeedback/microfeedback-github.svg)](https://greenkeeper.io/)
 
 [![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/microfeedback/microfeedback-github&&env=GH_TOKEN)
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
