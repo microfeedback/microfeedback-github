@@ -40,7 +40,7 @@
     "axios": "^0.18.0",
     "lodash.trim": "^4.5.1",
     "markdown-table": "^1.1.2",
-    "micro": "^9.0.0",
+    "micro": "^9.3.3",
     "microfeedback-core": "^3.0.0",
     "mustache": "^2.3.0",
     "parse-github-repo-url": "^1.4.0",
