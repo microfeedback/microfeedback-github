@@ -34,7 +34,7 @@
     "axios-mock-adapter": "^1.18.1",
     "micro-dev": "^3.0.0",
     "np": "^3.1.0",
-    "xo": "^0.22.0"
+    "xo": "^0.28.3"
   },
   "dependencies": {
     "axios": "^0.18.0",
