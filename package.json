@@ -45,7 +45,7 @@
     "mustache": "^2.3.2",
     "parse-github-repo-url": "^1.4.0",
     "truncate": "^2.1.0",
-    "ua-parser-js": "^0.7.19"
+    "ua-parser-js": "^0.7.24"
   },
   "xo": {
     "envs": [
